@@ -1,0 +1,5 @@
+const params = {
+  omdbApiKey: 'key',
+};
+
+export default params;

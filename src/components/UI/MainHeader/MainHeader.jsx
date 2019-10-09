@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.5rem',
 
     '@media(min-width: 40rem)': {
-      fontSize: '3rem',
+      fontSize: '2.2rem',
     },
   },
 }));

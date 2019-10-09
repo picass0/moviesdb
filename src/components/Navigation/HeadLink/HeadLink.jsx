@@ -15,7 +15,14 @@ const useStyles = makeStyles((theme) => ({
     },
 
     '&:hover, &:active': {
-      textDecoration: 'underline',
+      color: '#666',
+    },
+  },
+
+  active: {
+    color: theme.palette.secondary.main,
+    '@media(min-width: 40rem)': {
+      color: '#666',
     },
   },
 }));
@@ -23,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 function HeadLink({ children, to }) {
   const classes = useStyles();
   return (
-    <NavLink className={classes.link} to={to}>{children}</NavLink>
+    <NavLink exact activeClassName={classes.active} className={classes.link} to={to}>{children}</NavLink>
   );
 }
 

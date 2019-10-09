@@ -24,6 +24,14 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/destructuring-assignment": "off",
-    "max-len": "off"
+    "max-len": "off",
+    "arrow-body-style": "off",
+    "object-curly-newline": "off",
+    "react/prefer-stateless-function": "off",
+    "import/prefer-default-export": "off",
+    "react/prop-types": [1, {ignore: ["classes"]}],
+    "react/require-default-props": "off",
+    "react/sort-comp": "off",
+    "react/forbid-prop-types": "off"
   },
 };

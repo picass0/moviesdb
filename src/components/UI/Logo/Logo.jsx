@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   logo: {
@@ -11,15 +12,23 @@ const useStyles = makeStyles(() => ({
     fontWeight: 'bold',
     color: '#666',
   },
+  container: {
+    'text-decoration': 'none',
+    '&:hover, &:active': {
+      'text-decoration': 'none',
+    },
+  },
 }));
 
 function Logo() {
   const classes = useStyles();
 
   return (
-    <Typography variant="h6" className={classes.logo}>
-      Кинобаза
-    </Typography>
+    <NavLink to="/" className={classes.container}>
+      <Typography variant="h6" className={classes.logo}>
+        MovieDB
+      </Typography>
+    </NavLink>
   );
 }
 

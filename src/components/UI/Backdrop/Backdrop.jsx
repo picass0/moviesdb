@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(() => ({
   backdrop: {
@@ -20,5 +21,10 @@ function Backdrop(props) {
     <div style={{ display }} className={classes.backdrop} onClick={props.clicked} />
   );
 }
+
+Backdrop.propTypes = {
+  active: PropTypes.bool,
+  clicked: PropTypes.func.isRequired,
+};
 
 export default Backdrop;

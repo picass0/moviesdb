@@ -1,9 +1,10 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   container: {
     background: '#e4e4e4',
     display: 'flex',
@@ -20,25 +21,45 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginLeft: theme.spacing(4),
   },
-}));
+});
 
-function SearchBar() {
-  const classes = useStyles();
-  return (
-    <div className={classes.container}>
-      <TextField
-        className={classes.textFieldContainer}
-        variant="outlined"
-        inputProps={{
-          'aria-label': 'bare',
-          className: classes.textField,
-        }}
-      />
-      <Button className={classes.button}>
-        Найти
-      </Button>
-    </div>
-  );
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchStr: this.props.searchStr,
+    };
+  }
+
+  render() {
+    const { submitHandler, classes, disableFindButton = false } = this.props;
+
+    const disabled = disableFindButton || !this.state.searchStr.trim();
+
+    return (
+      <form onSubmit={(e) => { e.preventDefault(); submitHandler(this.state.searchStr.trim()); }} className={classes.container}>
+        <TextField
+          className={classes.textFieldContainer}
+          variant="outlined"
+          inputProps={{
+            'aria-label': 'bare',
+            className: classes.textField,
+          }}
+          onChange={(event) => { this.setState({ searchStr: event.target.value }); }}
+          value={this.state.searchStr}
+        />
+        <Button className={classes.button} type="submit" disabled={disabled}>
+          Find
+        </Button>
+      </form>
+    );
+  }
 }
 
-export default SearchBar;
+SearchBar.propTypes = {
+  submitHandler: PropTypes.func.isRequired,
+  searchStr: PropTypes.string.isRequired,
+  disableFindButton: PropTypes.bool.isRequired,
+};
+
+export default withStyles(styles)(SearchBar);

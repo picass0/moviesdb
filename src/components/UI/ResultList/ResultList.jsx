@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     listStyle: 'none',
     margin: theme.spacing(0, 0, 6),
     padding: 0,
+    width: '100%',
   },
 }));
 
@@ -18,14 +19,16 @@ function ResultList({
   const classes = useStyles();
   return (
     <>
-      <ul className={classes.resultList}>
-        {children}
-      </ul>
+      <table className={classes.resultList}>
+        <tbody>
+          {children}
+        </tbody>
+      </table>
       <Pagination
         limit={limit}
         offset={offset}
         total={total}
-        onClick={(e, onClickOffset) => { paginationClickHandler(onClickOffset); }}
+        onClick={(e, newOffset) => { paginationClickHandler(newOffset); }}
       />
     </>
   );

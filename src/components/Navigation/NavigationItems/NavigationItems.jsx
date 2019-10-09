@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import HeadLink from '../HeadLink/HeadLink';
+import { FAVORITES_PAGE_ROUTE, SEARCH_PAGE_ROUTE, WATCHED_PAGE_ROUTE } from '../../../constants/routes';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,9 +25,9 @@ function NavigationItems() {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <HeadLink to="/">Поиск</HeadLink>
-      <HeadLink to="/">Просмотренные</HeadLink>
-      <HeadLink to="/">Избранное</HeadLink>
+      <HeadLink to={SEARCH_PAGE_ROUTE}>Search</HeadLink>
+      <HeadLink to={WATCHED_PAGE_ROUTE}>Watched</HeadLink>
+      <HeadLink to={FAVORITES_PAGE_ROUTE}>Favorites</HeadLink>
     </div>
   );
 }

@@ -7,17 +7,10 @@ import ExpandButton from '../../ExpandButton/ExpandButton';
 const styles = (theme) => ({
   container: {
     padding: theme.spacing(2),
-    display: 'block',
-    '@media(min-width: 40rem)': {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexGrow: 1,
-    },
   },
   buttonsDesktopContainer: {
     '& button': {
-      margin: theme.spacing(0, 1, 0, 0),
+      margin: theme.spacing(0, 2, 0, 0),
       textAlign: 'left',
     },
 
@@ -33,7 +26,8 @@ const styles = (theme) => ({
       width: '100%',
     },
 
-    display: 'block',
+    display: 'table-row',
+    width: '100%',
     '@media(min-width: 40rem)': {
       display: 'none',
     },
@@ -51,14 +45,17 @@ const styles = (theme) => ({
       textDecoration: 'underline',
     },
   },
-  content: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   toggleButton: {
     '@media(min-width: 40rem)': {
       display: 'none',
+    },
+  },
+  buttonsContainer: {
+    '@media(min-width: 40rem)': {
+      width: '30%',
+    },
+    '@media(min-width: 91rem)': {
+      width: '25%',
     },
   },
 });
@@ -67,10 +64,8 @@ class ResultItem extends Component {
   constructor(props) {
     super(props);
     this.toggleMobileButtonsHandler = this.toggleMobileButtonsHandler.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {
       mobileButtonsActive: false,
-      offset: 0,
     };
   }
 
@@ -81,43 +76,41 @@ class ResultItem extends Component {
     }));
   }
 
-  handleClick(offset) {
-    this.setState({ offset });
-  }
-
   render() {
     const { classes, item, buttons } = this.props;
+    const link = `/movie/${item.id}`;
     return (
-      <li className={classes.container}>
-        <div className={classes.content}>
-          <div>
-            <span className={classes.year}>{item.year} г.</span>
+      <>
+        <tr className={classes.container}>
+          <td className={classes.year}>{item.year}
+          </td>
+          <td>
             <NavLink
-              to={item.link}
+              to={link}
               className={classes.link}
             >
               {item.name}
             </NavLink>
-          </div>
-          <div>
+          </td>
+          <td className={classes.buttonsContainer}>
             <ExpandButton
               expanded={this.state.mobileButtonsActive}
               className={classes.toggleButton}
               clicked={this.toggleMobileButtonsHandler}
             />
-          </div>
-        </div>
-        <div className={classes.buttonsDesktopContainer}>
-          <div>
-            {buttons}
-          </div>
-        </div>
-        <div
-          className={classes.buttonsMobileContainer}
-        >
-          { this.state.mobileButtonsActive ? buttons : null}
-        </div>
-      </li>
+            <div className={classes.buttonsDesktopContainer}>
+              <div>
+                {buttons}
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr className={classes.buttonsMobileContainer}>
+          <td colSpan="3">
+            { this.state.mobileButtonsActive ? buttons : null}
+          </td>
+        </tr>
+      </>
     );
   }
 }

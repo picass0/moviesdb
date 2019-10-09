@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import NavigationItems from '../../../NavigationItems/NavigationItems';
 import Backdrop from '../../../../UI/Backdrop/Backdrop';
 
@@ -27,5 +28,10 @@ function SideDrawer(props) {
     </>
   );
 }
+
+SideDrawer.propTypes = {
+  backdropClicked: PropTypes.func.isRequired,
+  active: PropTypes.bool,
+};
 
 export default SideDrawer;

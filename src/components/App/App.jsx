@@ -6,10 +6,17 @@ import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import PageSearch from '../PageSearch/PageSearch';
-import PageFilm from '../PageFilm/PageFilm';
+import PageMovie from '../PageMovie/PageMovie';
 import PageError from '../PageError/PageError';
 import Layout from '../Layout/Layout';
-import { MAIN_PAGE_ROUTE, FILM_PAGE_ROUTE } from '../../constants/routes';
+import {
+  SEARCH_PAGE_ROUTE,
+  FAVORITES_PAGE_ROUTE,
+  WATCHED_PAGE_ROUTE,
+  MOVIE_PAGE_ROUTE,
+} from '../../constants/routes';
+import PageFavorites from '../PageFavorites/PageFavorites';
+import PageWatched from '../PageWatched/PageWatched';
 
 const theme = createMuiTheme({
   palette: {
@@ -27,13 +34,22 @@ export default function App() {
         <Switch>
           <Route
             exact
-            path={MAIN_PAGE_ROUTE}
+            path={SEARCH_PAGE_ROUTE}
             component={PageSearch}
           />
           <Route
+            path={MOVIE_PAGE_ROUTE}
+            component={PageMovie}
+          />
+          <Route
             exact
-            path={FILM_PAGE_ROUTE}
-            component={PageFilm}
+            path={FAVORITES_PAGE_ROUTE}
+            component={PageFavorites}
+          />
+          <Route
+            exact
+            path={WATCHED_PAGE_ROUTE}
+            component={PageWatched}
           />
           <Route
             path="*"
