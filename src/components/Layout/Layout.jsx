@@ -9,9 +9,9 @@ function Layout({ history, children }) {
     <>
       <DesktopHeader />
       <MobileHeader key={history.location.key} />
-      <main>
+      <div>
         {children}
-      </main>
+      </div>
     </>
   );
 }
