@@ -2,7 +2,9 @@
 
 ## Description
 
-Simple movie-collection app. Allows searching for movies, favoring them and marking them as watched. Stores data in localStorage.
+Simple movie-collection app. Allows searching for movies, favoring them and marking them as watched.
+Stores data in localStorage.
+Application built on top of react and redux libraries
 
 Uses omdb api - http://www.omdbapi.com/
 
