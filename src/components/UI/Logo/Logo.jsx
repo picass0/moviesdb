@@ -26,7 +26,7 @@ function Logo() {
   return (
     <NavLink to="/" className={classes.container}>
       <Typography variant="h6" className={classes.logo}>
-        MovieDB
+        MoviesDB
       </Typography>
     </NavLink>
   );
