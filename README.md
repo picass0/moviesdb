@@ -1,4 +1,4 @@
-## Movies Database Application
+## Movies Collection Application
 
 ## Description
 
