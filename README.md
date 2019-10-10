@@ -25,5 +25,3 @@ npm run start
 npm install
 npm run build
 ```
-
-[]: http://moviesdb.tk/?searchStr=Avengers
