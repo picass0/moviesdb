@@ -1,4 +1,4 @@
-const params = {
+export const params = {
   omdbApiKey: 'key',
 };
 
