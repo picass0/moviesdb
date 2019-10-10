@@ -1,0 +1,94 @@
+---
+  - name: Build source code for deployment
+    hosts: control
+    gather_facts: false
+    tasks:
+      - name: Run npm install
+        command: npm install
+        args:
+          chdir: ../
+
+      - name: Run npm run build
+        command: npm run build
+        args:
+          chdir: ../
+
+      - name: create archive
+        archive:
+          path: ../build/*
+          dest: ../build.tgz
+
+  - name: Configure webserver and deploy archive with site content
+    hosts: webserver
+    gather_facts: false
+    tasks:
+      - name: Update apt
+        apt: update_cache=yes
+        become: True
+
+      - name: Install nginx
+        apt: name="{{ item }}" state=latest
+        become: True
+        loop:
+          - nginx
+
+      - name: remove /var/www/moviesdb directory
+        file:
+          path: /var/www/moviesdb
+          state: absent
+        become: True
+
+      - name: create /var/www/moviesdb directory
+        file:
+          path: /var/www/moviesdb
+          state: directory
+          mode: '0755'
+          owner: www-data
+          group: www-data
+        become: True
+
+      - name: Extract built Archive into /var/www/moviesdb directory
+        unarchive:
+          src: ../build.tgz
+          dest: /var/www/moviesdb
+        become: True
+
+      - name: Give ownership to www-data
+        file:
+          path: /var/www/moviesdb
+          mode: '0755'
+          owner: www-data
+          group: www-data
+          recurse: yes
+        become: True
+
+      - name: Upload Nginx config
+        copy:
+          src: ./config/moviesdb.conf
+          dest: /etc/nginx/sites-available/moviesdb.conf
+        become: True
+
+      - name: Create symlink for nginx config
+        file:
+          src: /etc/nginx/sites-available/moviesdb.conf
+          dest: /etc/nginx/sites-enabled/moviesdb.conf
+          state: link
+        become: True
+
+      - name: UFW - Allow Nginx
+        ufw:
+          rule: allow
+          name: Nginx Full
+        become: True
+
+      - name: remove default nginx site
+        file:
+          path: /etc/nginx/sites-enabled/default
+          state: absent
+        become: True
+
+      - name: restart nginx
+        service:
+          name: nginx
+          state: restarted
+        become: True
