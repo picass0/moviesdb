@@ -1,4 +1,4 @@
-## Movies Collection Application. [Link](http://moviesdb.tk/?searchStr=Avengers)
+## Movies Collection Application.
 
 ## Description
 
